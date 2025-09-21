@@ -9,16 +9,30 @@ export type InboxNotification = {
 };
 
 async function http<T>(url: string, options?: RequestInit): Promise<T> {
+  // Normalize relative URLs to absolute so fetch failures in some proxy setups are reduced
+  const fullUrl = url.startsWith('http') ? url : `${window.location.origin}${url}`;
+
   try {
-    const res = await fetch(url, {
+    const res = await fetch(fullUrl, {
       headers: { 'Content-Type': 'application/json' },
       ...options,
     });
+
     if (!res.ok) {
-      throw new Error(`HTTP ${res.status}: ${await res.text()}`);
+      const text = await res.text().catch(() => '');
+      throw new Error(`HTTP ${res.status}: ${text}`);
     }
-    return res.json();
-  } catch (err) {
+
+    // Try to parse JSON, but guard against empty responses
+    const text = await res.text();
+    return text ? (JSON.parse(text) as T) : ({} as T);
+  } catch (err: any) {
+    // Annotate TypeError from fetch to provide clearer actionable logs
+    if (err instanceof TypeError && /failed to fetch/i.test(err.message)) {
+      console.error('Network error while fetching', fullUrl, err);
+      throw new Error('Network error: failed to reach the server. Check your network or the dev server proxy.');
+    }
+
     throw err instanceof Error ? err : new Error('Network error');
   }
 }
