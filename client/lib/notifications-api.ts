@@ -13,6 +13,37 @@ async function http<T>(url: string, options?: RequestInit): Promise<T> {
   const fullUrl = url.startsWith('http') ? url : `${window.location.origin}${url}`;
 
   try {
+    // If fetch is not available in this environment (some injected scripts can overwrite), fallback to XHR
+    if (typeof fetch !== 'function') {
+      return await new Promise<T>((resolve, reject) => {
+        try {
+          const xhr = new XMLHttpRequest();
+          xhr.open(options?.method || 'GET', fullUrl, true);
+          (xhr as any).responseType = 'text';
+          const headers = { 'Content-Type': 'application/json', ...(options && (options.headers as any)) };
+          Object.keys(headers).forEach((k) => xhr.setRequestHeader(k, (headers as any)[k]));
+
+          xhr.onload = () => {
+            if (xhr.status >= 200 && xhr.status < 300) {
+              const text = xhr.responseText;
+              try {
+                resolve(text ? (JSON.parse(text) as T) : ({} as T));
+              } catch (e) {
+                resolve({} as T);
+              }
+            } else {
+              reject(new Error(`HTTP ${xhr.status}: ${xhr.responseText || ''}`));
+            }
+          };
+
+          xhr.onerror = () => reject(new Error('Network error'));
+          xhr.send(options?.body as any);
+        } catch (e) {
+          reject(e);
+        }
+      });
+    }
+
     const res = await fetch(fullUrl, {
       headers: { 'Content-Type': 'application/json' },
       ...options,
