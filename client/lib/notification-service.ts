@@ -61,7 +61,7 @@ class NotificationService {
       })
       if (!res.ok) throw new Error(`Failed to mark as read: ${res.status}`)
     } catch (e) {
-      console.warn('NotificationService: markAsRead failed (ignored)', e)
+      // ignore failures in preview environment
     }
   }
 
