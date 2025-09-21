@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Upload, Image as ImageIcon, FileText } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import React from 'react';
 
 export type ImportTriggerProps = {
@@ -13,7 +14,7 @@ export const SmartImportButton: React.FC<ImportTriggerProps> = ({ onImport, size
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant={variant} size={size}>
+        <Button variant={variant} size={size} className="h-8 px-2.5 rounded-full whitespace-nowrap">
           <Upload className="w-4 h-4 mr-2" />
           Smart Import
         </Button>

@@ -118,23 +118,23 @@ export default function Inventory() {
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
         <div>
           <BackButton className="mb-4" />
-          <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
+          <h1 className="text-3xl font-semibold text-gray-900 flex items-center gap-3 leading-[1.3]" style={{ wordBreak: 'keep-all', hyphens: 'auto' }}>
             <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg flex items-center justify-center">
               <Package className="w-6 h-6 text-white" />
             </div>
             Inventory Management
           </h1>
-          <p className="text-gray-600 mt-1">
+          <p className="text-gray-600 mt-1 leading-[1.3]" style={{ wordBreak: 'keep-all', hyphens: 'auto' }}>
             Manage products, stock levels, and inventory alerts
           </p>
         </div>
         
-        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-          <Button variant="outline" onClick={() => window.location.href = '/dashboard/inventory-batches'}>
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 chip-row">
+          <Button variant="outline" className="h-8 px-2.5 rounded-full whitespace-nowrap" onClick={() => window.location.href = '/dashboard/inventory-batches'}>
             <Calendar className="w-4 h-4 mr-2" />
             Batch Tracking
           </Button>
-          <Button>
+          <Button className="h-11 w-full sm:w-auto">
             <Plus className="w-4 h-4 mr-2" />
             Add Product
           </Button>

@@ -691,7 +691,7 @@ export default function Dashboard() {
                           <CardHeader>
                             <div className="flex items-center space-x-3">
                               <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                                <IconComponent className="w-6 h-6 text-blue-600" />
+                                <IconComponent className="w-5 h-5 text-blue-600" />
                               </div>
                               <div>
                                 <CardTitle className="text-lg group-hover:text-blue-600 transition-colors">
