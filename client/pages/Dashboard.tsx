@@ -286,7 +286,7 @@ export default function Dashboard() {
                     <Trophy className="w-5 h-5" />
                     <span className="text-sm font-medium flex items-center gap-2">
                       Staff Leaderboard
-                      {!isPremium && <PremiumBadge />}
+                      {!isPremium && <Crown className="w-3 h-3 text-yellow-600" aria-label="Premium" />}
                     </span>
                     <ChevronRight className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
                   </Link>
@@ -299,7 +299,7 @@ export default function Dashboard() {
                     <UserCheck className="w-5 h-5" />
                     <span className="text-sm font-medium flex items-center gap-2">
                       Task Assignment
-                      {!isPremium && <PremiumBadge />}
+                      {!isPremium && <Crown className="w-3 h-3 text-yellow-600" aria-label="Premium" />}
                     </span>
                     <ChevronRight className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
                   </Link>
@@ -311,7 +311,7 @@ export default function Dashboard() {
                     <HelpCircle className="w-5 h-5" />
                     <span className="text-sm font-medium flex items-center gap-2">
                       Support Tickets
-                      {!isPremium && <PremiumBadge />}
+                      {!isPremium && <Crown className="w-3 h-3 text-yellow-600" aria-label="Premium" />}
                     </span>
                     <ChevronRight className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
                   </Link>
@@ -515,8 +515,11 @@ export default function Dashboard() {
               <h2 className="text-xl font-semibold text-gray-900 mb-4">
                 {getBusinessTypeConfig(business.type).name} Features
               </h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-                {getBusinessModules(business.type, user.role).slice(0, 6).map((module) => {
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
+                {getBusinessModules(business.type, user.role)
+                  .filter(m => m.id !== "sales-documents" && m.id !== "main-dashboard")
+                  .slice(0, 4)
+                  .map((module) => {
                   const IconComponent = getIconComponent(module.icon);
                   return (
                     <Link key={module.id} to={module.path}>
@@ -527,7 +530,7 @@ export default function Dashboard() {
                               <IconComponent className={`w-6 h-6 text-${getBusinessTypeConfig(business.type).primaryColor}-600`} />
                             </div>
                             <div>
-                              <CardTitle className={`text-lg group-hover:text-${getBusinessTypeConfig(business.type).primaryColor}-600 transition-colors truncate`}>
+                              <CardTitle className={`text-lg group-hover:text-${getBusinessTypeConfig(business.type).primaryColor}-600 transition-colors`}>
                                 {module.title}
                               </CardTitle>
                               <CardDescription className="text-sm">
@@ -682,7 +685,7 @@ export default function Dashboard() {
             {dashboardConfig && (
               <div className="mb-8">
                 <h2 className="text-xl font-semibold text-gray-900 mb-4">Quick Actions</h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
                   {dashboardConfig.quickActions.map((module) => {
                     const IconComponent = getIconComponent(module.icon);
                     return (
@@ -691,7 +694,7 @@ export default function Dashboard() {
                           <CardHeader>
                             <div className="flex items-center space-x-3">
                               <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                                <IconComponent className="w-6 h-6 text-blue-600" />
+                                <IconComponent className="w-5 h-5 text-blue-600" />
                               </div>
                               <div>
                                 <CardTitle className="text-lg group-hover:text-blue-600 transition-colors">
@@ -724,12 +727,12 @@ export default function Dashboard() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="flex items-center space-x-4 p-4 rounded-lg bg-blue-50 border border-blue-100">
+                  <div className="flex items-center space-x-4 p-3 rounded-lg bg-blue-50 border border-blue-100">
                     <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
                       <TrendingUp className="w-5 h-5 text-white" />
                     </div>
                     <div className="flex-1">
-                      <p className="text-sm font-medium text-gray-900">New order received</p>
+                      <p className="text-sm font-medium text-gray-900 line-clamp-2">New order received</p>
                       <p className="text-sm text-gray-500">Recent order completed</p>
                     </div>
                     <div className="text-right">
@@ -739,12 +742,12 @@ export default function Dashboard() {
                   </div>
 
                   {permissions.hasPermission('addEditDeleteProducts') && (
-                    <div className="flex items-center space-x-4 p-4 rounded-lg bg-green-50 border border-green-100">
+                    <div className="flex items-center space-x-4 p-3 rounded-lg bg-green-50 border border-green-100">
                       <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
                         <Package className="w-5 h-5 text-white" />
                       </div>
                       <div className="flex-1">
-                        <p className="text-sm font-medium text-gray-900">Inventory updated</p>
+                        <p className="text-sm font-medium text-gray-900 line-clamp-2">Inventory updated</p>
                         <p className="text-sm text-gray-500">Products updated in inventory</p>
                       </div>
                       <div className="text-right">
@@ -755,12 +758,12 @@ export default function Dashboard() {
                   )}
 
                   {permissions.hasPermission('hrAndStaffAttendance') && (
-                    <div className="flex items-center space-x-4 p-4 rounded-lg bg-purple-50 border border-purple-100">
+                    <div className="flex items-center space-x-4 p-3 rounded-lg bg-purple-50 border border-purple-100">
                       <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center">
                         <User className="w-5 h-5 text-white" />
                       </div>
                       <div className="flex-1">
-                        <p className="text-sm font-medium text-gray-900">Team member joined</p>
+                        <p className="text-sm font-medium text-gray-900 line-clamp-2">Team member joined</p>
                         <p className="text-sm text-gray-500">New team member added</p>
                       </div>
                       <div className="text-right">
@@ -771,12 +774,12 @@ export default function Dashboard() {
                   )}
 
                   {permissions.hasPermission('assignTasksOrRoutes') && (
-                    <div className="flex items-center space-x-4 p-4 rounded-lg bg-yellow-50 border border-yellow-100">
+                    <div className="flex items-center space-x-4 p-3 rounded-lg bg-yellow-50 border border-yellow-100">
                       <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center">
                         <UserCheck className="w-5 h-5 text-white" />
                       </div>
                       <div className="flex-1">
-                        <p className="text-sm font-medium text-gray-900">Task completed</p>
+                        <p className="text-sm font-medium text-gray-900 line-clamp-2">Task completed</p>
                         <p className="text-sm text-gray-500">Monthly report generated</p>
                       </div>
                       <div className="text-right">
@@ -787,12 +790,12 @@ export default function Dashboard() {
                   )}
 
                   {(permissions.hasPermission('financialReports') || permissions.userRole === 'sales_staff') && (
-                    <div className="flex items-center space-x-4 p-4 rounded-lg bg-indigo-50 border border-indigo-100">
+                    <div className="flex items-center space-x-4 p-3 rounded-lg bg-indigo-50 border border-indigo-100">
                       <div className="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center">
                         <TrendingUp className="w-5 h-5 text-white" />
                       </div>
                       <div className="flex-1">
-                        <p className="text-sm font-medium text-gray-900">Commission earned</p>
+                        <p className="text-sm font-medium text-gray-900 line-clamp-2">Commission earned</p>
                         <p className="text-sm text-gray-500">Commission processed for sales team</p>
                       </div>
                       <div className="text-right">

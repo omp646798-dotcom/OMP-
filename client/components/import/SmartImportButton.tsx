@@ -13,7 +13,7 @@ export const SmartImportButton: React.FC<ImportTriggerProps> = ({ onImport, size
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant={variant} size={size}>
+        <Button variant={variant} size={size} className="h-8 px-2.5 rounded-full whitespace-nowrap">
           <Upload className="w-4 h-4 mr-2" />
           Smart Import
         </Button>
