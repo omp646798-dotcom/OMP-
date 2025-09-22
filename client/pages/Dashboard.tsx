@@ -755,7 +755,7 @@ export default function Dashboard() {
                   )}
 
                   {permissions.hasPermission('hrAndStaffAttendance') && (
-                    <div className="flex items-center space-x-4 p-4 rounded-lg bg-purple-50 border border-purple-100">
+                    <div className="flex items-center space-x-4 p-3 rounded-lg bg-purple-50 border border-purple-100">
                       <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center">
                         <User className="w-5 h-5 text-white" />
                       </div>
