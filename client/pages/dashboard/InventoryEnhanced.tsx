@@ -442,7 +442,7 @@ export default function InventoryEnhanced() {
                   </div>
                 )}
               </h1>
-              <div className="text-gray-600 mt-1 flex items-center gap-4">
+              <div className="text-gray-600 mt-1 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-xs sm:text-sm">
                 <span>Manage products, stock levels, and inventory alerts</span>
                 <Badge variant="outline" className="text-xs">
                   {filteredProducts.length} of {products.length} products
