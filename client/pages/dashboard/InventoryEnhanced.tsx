@@ -463,7 +463,7 @@ export default function InventoryEnhanced() {
             
             <div className="w-full grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:items-center sm:justify-end">
               {undoStack.length > 0 && (
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="default" className="text-base">
                   <Undo2 className="w-4 h-4 mr-2" />
                   Undo
                 </Button>
