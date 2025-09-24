@@ -84,7 +84,7 @@ export const ToastContainer: React.FC = () => {
   }, []);
 
   return (
-    <div className="fixed top-4 right-4 z-50 space-y-2">
+    <div className="fixed top-3 right-3 sm:top-4 sm:right-4 z-[60] space-y-2 safe-top">
       {notifications.map((notification) => (
         <Toast
           key={notification.id}
