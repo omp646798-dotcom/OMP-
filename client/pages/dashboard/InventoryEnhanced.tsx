@@ -1029,7 +1029,7 @@ export default function InventoryEnhanced() {
                     Edit
                   </Button>
 
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline" size="default" className="text-base">
                     <MoreHorizontal className="w-4 h-4" />
                   </Button>
                 </div>
