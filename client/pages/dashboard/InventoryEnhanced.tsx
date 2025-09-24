@@ -941,12 +941,12 @@ export default function InventoryEnhanced() {
                   />
                   
                   {/* Product Icon */}
-                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center relative ${
+                  <div className={`w-14 h-14 rounded-lg flex items-center justify-center relative ${
                     product.status === 'out_of_stock' ? 'bg-red-100 text-red-600' :
                     product.stock <= product.minStock ? 'bg-orange-100 text-orange-600' :
                     'bg-green-100 text-green-600'
                   }`}>
-                    <Package className="w-6 h-6" />
+                    <Package className="w-7 h-7" />
                     {product.starred && (
                       <Star className="w-3 h-3 absolute -top-1 -right-1 text-yellow-500 fill-current" />
                     )}
@@ -954,7 +954,7 @@ export default function InventoryEnhanced() {
                   
                   {/* Product Info */}
                   <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2 mb-1">
+                    <div className="flex items-center gap-2 mb-1 text-base">
                       <p className="font-medium truncate">{product.name}</p>
                       {product.starred && (
                         <Star className="w-4 h-4 text-yellow-500 fill-current flex-shrink-0" />
@@ -971,7 +971,7 @@ export default function InventoryEnhanced() {
                       )}
                     </p>
                     
-                    <div className="flex items-center gap-4 flex-wrap">
+                    <div className="flex items-center gap-4 flex-wrap text-base">
                       <span className="text-sm font-medium">
                         Price: {formatCurrency(product.price)}
                       </span>
