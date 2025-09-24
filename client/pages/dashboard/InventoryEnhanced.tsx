@@ -1016,7 +1016,8 @@ export default function InventoryEnhanced() {
 
                   <Button
                     variant="outline"
-                    size="sm"
+                    size="default"
+                    className="text-base"
                     onClick={() => handleViewProduct(product)}
                   >
                     <Eye className="w-4 h-4 mr-2" />
