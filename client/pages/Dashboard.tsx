@@ -183,7 +183,7 @@ export default function Dashboard() {
               )}
 
               {/* Notifications */}
-              <NotificationsInbox />
+              <div className="shrink-0"><NotificationsInbox /></div>
 
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center">
