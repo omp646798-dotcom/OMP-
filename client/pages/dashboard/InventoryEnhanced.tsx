@@ -428,7 +428,7 @@ export default function InventoryEnhanced() {
         <div className="flex flex-col gap-4">
           <BackButton />
           
-          <div className="flex justify-between items-start gap-4">
+          <div className="flex flex-col sm:flex-row sm:justify-between items-start gap-3 sm:gap-4">
             <div>
               <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 flex items-center gap-3">
                 <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg flex items-center justify-center">

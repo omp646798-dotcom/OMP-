@@ -129,7 +129,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b sticky top-0 z-50">
+      <header className="bg-white shadow-sm border-b sticky top-0 z-50 safe-top">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 max-w-full overflow-x-hidden">
             <div className="flex items-center space-x-4">
@@ -183,7 +183,7 @@ export default function Dashboard() {
               )}
 
               {/* Notifications */}
-              <NotificationsInbox />
+              <div className="shrink-0"><NotificationsInbox /></div>
 
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center">
