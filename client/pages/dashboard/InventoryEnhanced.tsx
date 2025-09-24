@@ -422,17 +422,17 @@ export default function InventoryEnhanced() {
     advancedFilters.stockRange.min > 0 || advancedFilters.stockRange.max < 1000;
 
   return (
-    <div className="p-4 sm:p-6 space-y-6 pb-24 safe-bottom">
+    <div className="mx-auto max-w-7xl p-4 sm:p-6 space-y-6 pb-24 safe-bottom text-[15px] md:text-[16px]">
       {/* Enhanced Header with Back Button */}
-      <div className={`bg-white border rounded-lg p-4 transition-all ${headerSticky ? 'sticky top-4 z-40 shadow-lg' : ''}`}>
+      <div className={`bg-white border rounded-xl p-5 sm:p-6 transition-all ${headerSticky ? 'sticky top-4 z-40 shadow-lg' : ''}`}>
         <div className="flex flex-col gap-4">
           <BackButton />
           
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-start gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg flex items-center justify-center">
-                  <Package className="w-6 h-6 text-white" />
+              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 flex items-center gap-3">
+                <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                  <Package className="w-7 h-7 text-white" />
                 </div>
                 Inventory Management
                 {autoSaving && (
@@ -442,7 +442,7 @@ export default function InventoryEnhanced() {
                   </div>
                 )}
               </h1>
-              <div className="text-gray-600 mt-1 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-xs sm:text-sm">
+              <div className="text-gray-600 mt-1 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm">
                 <span>Manage products, stock levels, and inventory alerts</span>
                 <Badge variant="outline" className="text-xs">
                   {filteredProducts.length} of {products.length} products
@@ -450,18 +450,18 @@ export default function InventoryEnhanced() {
                 {hasActiveFilters && (
                   <Button
                     variant="ghost"
-                    size="sm"
+                    size="default"
                     onClick={clearAllFilters}
-                    className="text-blue-600 hover:text-blue-700"
+                    className="text-blue-600 hover:text-blue-700 text-base"
                   >
-                    <X className="w-3 h-3 mr-1" />
+                    <X className="w-4 h-4 mr-1" />
                     Clear filters
                   </Button>
                 )}
               </div>
             </div>
             
-            <div className="w-full grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center">
+            <div className="w-full grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:items-center sm:justify-end">
               {undoStack.length > 0 && (
                 <Button variant="outline" size="sm">
                   <Undo2 className="w-4 h-4 mr-2" />
