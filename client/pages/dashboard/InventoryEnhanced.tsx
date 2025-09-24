@@ -38,6 +38,7 @@ import {
   Tag
 } from 'lucide-react';
 import { usePermissions } from '@/lib/permissions';
+import { dataManager } from '@/lib/data-manager';
 import { inventoryService } from '@/lib/inventory-service';
 import { formatCurrency } from '@/lib/business-data';
 import BackButton from '@/components/BackButton';
@@ -182,6 +183,24 @@ export default function InventoryEnhanced() {
     // Load data from inventory service (only once on mount)
     setLowStockProducts(inventoryService.getLowStockProducts());
     setExpiryAlerts(inventoryService.getExpiryAlerts(false));
+
+    // Load products from data manager
+    try {
+      const loaded = dataManager.getAllProducts().map(p => ({
+        id: p.id,
+        name: p.name,
+        sku: p.sku,
+        category: p.category,
+        price: p.price,
+        stock: p.stock,
+        minStock: p.lowStockThreshold || 10,
+        status: p.isActive ? (p.stock > 0 ? 'active' as const : 'out_of_stock' as const) : 'inactive' as const,
+        lastUpdated: new Date().toISOString()
+      }));
+      setProducts(loaded);
+    } catch {
+      setProducts([]);
+    }
 
     // Load recent items (only once on mount)
     const stored = localStorage.getItem('recent_inventory_items');
@@ -403,7 +422,7 @@ export default function InventoryEnhanced() {
     advancedFilters.stockRange.min > 0 || advancedFilters.stockRange.max < 1000;
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 sm:p-6 space-y-6 pb-24 safe-bottom">
       {/* Enhanced Header with Back Button */}
       <div className={`bg-white border rounded-lg p-4 transition-all ${headerSticky ? 'sticky top-4 z-40 shadow-lg' : ''}`}>
         <div className="flex flex-col gap-4">
@@ -690,6 +709,30 @@ export default function InventoryEnhanced() {
         </div>
       )}
 
+      {/* Quick scopes (mobile-first) */}
+      <div className="mt-2">
+        <Tabs
+          value={selectedTab}
+          onValueChange={(v)=>{
+            setSelectedTab(v);
+            setQuickFilters({
+              starred: v === 'starred',
+              lowStock: v === 'low',
+              outOfStock: v === 'oos',
+              recentlyUpdated: v === 'recent'
+            });
+          }}
+        >
+          <TabsList className="w-full grid grid-cols-2 gap-2 sm:inline-flex">
+            <TabsTrigger value="all">All</TabsTrigger>
+            <TabsTrigger value="starred">Favorites</TabsTrigger>
+            <TabsTrigger value="low">Low Stock</TabsTrigger>
+            <TabsTrigger value="oos">Out of Stock</TabsTrigger>
+            <TabsTrigger value="recent">Recent</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      </div>
+
       {/* Enhanced Overview Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
         <Card className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => setSelectedTab('all')}>
@@ -788,7 +831,7 @@ export default function InventoryEnhanced() {
 
       {/* Bulk Selection Bar */}
       {bulkSelection.selectedItems.length > 0 && (
-        <Card className="border-blue-200 bg-blue-50">
+        <Card className="border-blue-200 bg-blue-50 fixed bottom-4 left-4 right-4 z-40 sm:static sm:bottom-auto sm:left-auto sm:right-auto">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
