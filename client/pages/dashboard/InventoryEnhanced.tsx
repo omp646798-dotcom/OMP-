@@ -430,7 +430,7 @@ export default function InventoryEnhanced() {
           
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center gap-3">
                 <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg flex items-center justify-center">
                   <Package className="w-6 h-6 text-white" />
                 </div>
