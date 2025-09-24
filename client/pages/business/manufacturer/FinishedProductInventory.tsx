@@ -36,9 +36,9 @@ export default function FinishedProductInventory() {
   return (
     <div className="p-6 space-y-6">
       <BackButton />
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <h1 className="text-2xl font-bold">Finished Product Inventory</h1>
-        <Button onClick={() => { setTab('finished'); setOpen(true); }}>Add Inventory Item</Button>
+        <Button className="hidden sm:inline-flex" onClick={() => { setTab('finished'); setOpen(true); }}>Add Inventory Item</Button>
       </div>
 
       <Card>
@@ -80,11 +80,15 @@ export default function FinishedProductInventory() {
               </div>
             ))}
             {filtered.length === 0 && (
-              <p className="text-sm text-gray-500">No products added yet.</p>
+              <div className="text-sm text-gray-500 text-center py-6 border rounded-lg">No products added yet.</div>
             )}
           </div>
         </CardContent>
       </Card>
+
+      <div className="sticky-action-bar sm:hidden">
+        <Button className="w-full" onClick={() => { setTab('finished'); setOpen(true); }}>Add Inventory Item</Button>
+      </div>
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="sm:max-w-xl">
