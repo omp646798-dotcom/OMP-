@@ -815,9 +815,9 @@ export default function InventoryEnhanced() {
                   <Button
                     key={id}
                     variant="outline"
-                    size="sm"
+                    size="default"
                     onClick={() => handleViewProduct(product)}
-                    className="whitespace-nowrap"
+                    className="whitespace-nowrap text-base"
                   >
                     <Package className="w-3 h-3 mr-1" />
                     {product.name}
